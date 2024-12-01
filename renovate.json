@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^datadog-agent/Dockerfile$"],
+      "matchStrings": [
+        "# datadog/agent:(?<currentValue>[\\d\\.]+)\\r?\\nFROM datadog/agent@(?<currentDigest>sha256:[a-f0-9]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "datadog/agent",
+      "packageNameTemplate": "datadog/agent",
+      "autoReplaceStringTemplate": "# datadog/agent:{{{newValue}}}\nFROM datadog/agent@{{{newDigest}}}"
+    }
+  ],
+  "enabledManagers": ["custom.regex"],
+  "dependencyDashboard": true
+}
